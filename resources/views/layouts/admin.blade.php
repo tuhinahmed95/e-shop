@@ -70,7 +70,11 @@
 
                 <li class="nav-item">
                     <a href="{{ route('category.trash') }}" class="nav-link">Trash List</a>
-                  </li>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('subcategory.list') }}" class="nav-link">SubCategory List</a>
+                </li>
               </ul>
             </div>
           </li>
@@ -97,13 +101,13 @@
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#forms" role="button" aria-expanded="false" aria-controls="forms">
               <i class="link-icon" data-feather="inbox"></i>
-              <span class="link-title">Forms</span>
+              <span class="link-title">Inventory Management</span>
               <i class="link-arrow" data-feather="chevron-down"></i>
             </a>
             <div class="collapse" id="forms">
               <ul class="nav sub-menu">
                 <li class="nav-item">
-                  <a href="pages/forms/basic-elements.html" class="nav-link">Basic Elements</a>
+                  <a href="pages/forms/basic-elements.html" class="nav-link">Brand</a>
                 </li>
                 <li class="nav-item">
                   <a href="pages/forms/advanced-elements.html" class="nav-link">Advanced Elements</a>
@@ -490,6 +494,7 @@
   <!-- custom js for this page -->
   <script src="{{ asset('backend') }}/assets/js/dashboard.js"></script>
   <script src="{{ asset('backend') }}/assets/js/datepicker.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   @yield('footer_script')
 	<!-- end custom js for this page -->
 </body>

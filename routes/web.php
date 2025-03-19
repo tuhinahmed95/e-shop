@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SubcategoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontendController::class, 'welcome']);
@@ -46,3 +47,12 @@ Route::get('/category/restore/{id}', [CategoryController::class,'category_restor
 Route::get('/category/permanent/delete/{id}', [CategoryController::class,'category_permanent_delete'])->name('category.permanent.delete');
 Route::post('/checked/category/trash', [CategoryController::class,'checked_category_trash'])->name('checked.category.trash');
 Route::post('/checked/category/restore', [CategoryController::class,'checked_category_restore'])->name('checked.category.restore');
+
+
+// Subcategory
+Route::get('/subcategory/list', [SubcategoryController::class, 'subcategory_list'])->name('subcategory.list');
+Route::get('/subcategory/create', [SubcategoryController::class, 'subcategory_create'])->name('subcategory.create');
+Route::post('/subcategory/store', [SubcategoryController::class, 'subcategory_store'])->name('subcategory.store');
+Route::get('/subcategory/edit/{id}', [SubcategoryController::class, 'subcategory_edit'])->name('subcategory.edit');
+Route::post('/subcategory/update/{id}', [SubcategoryController::class, 'subcategory_update'])->name('subcategory.update');
+Route::get('/subcategory/delete/{id}', [SubcategoryController::class, 'subcategory_delete'])->name('subcategory.delete');
