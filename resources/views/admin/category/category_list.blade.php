@@ -38,7 +38,6 @@
                                         </div>
                                     </th>
                                     <th>SL</th>
-                                    <th>SL</th>
                                     <th>Category Name</th>
                                     <th>Category Icon</th>
                                     <th>Action</th>

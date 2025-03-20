@@ -59,7 +59,7 @@
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#uiComponents" role="button" aria-expanded="false" aria-controls="uiComponents">
               <i class="link-icon" data-feather="feather"></i>
-              <span class="link-title">Category</span>
+              <span class="link-title">Product Manage</span>
               <i class="link-arrow" data-feather="chevron-down"></i>
             </a>
             <div class="collapse" id="uiComponents">
@@ -69,11 +69,15 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('category.trash') }}" class="nav-link">Trash List</a>
+                    <a href="{{ route('category.trash') }}" class="nav-link">Category Trash List</a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{ route('subcategory.list') }}" class="nav-link">SubCategory List</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('brand.list') }}" class="nav-link">Brand List</a>
                 </li>
               </ul>
             </div>

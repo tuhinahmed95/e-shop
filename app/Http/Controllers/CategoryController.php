@@ -114,7 +114,6 @@ class CategoryController extends Controller
     }
 
     public function checked_category_restore(Request $request){
-        print_r($request->category_id);
         foreach($request->category_id as $category){
             Category::onlyTrashed()->find($category)->restore();
 

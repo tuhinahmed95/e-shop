@@ -24,7 +24,7 @@ class SubcategoryController extends Controller
             'category' => 'required',
             'subcat_name' => 'required',
         ]);
-        
+
         $file_name = '';
         if($request->hasFile('subcat_icon')){
             $subcat_icon = $request->file('subcat_icon');
@@ -84,6 +84,10 @@ class SubcategoryController extends Controller
 
     public function subcategory_delete($id){
         $subcategory = Subcategory::find($id);
+        if($subcategory->subcat_icon && file_exists(public_path('uploads/subcategory/'.$subcategory->subcat_icon))){
+            unlink(public_path('uploads/subcategory/'.$subcategory->subcat_icon));
+        }
+
         $subcategory->delete();
         return redirect()->route('subcategory.list')->with('delete', 'Subcategory Dleleted!');
     }
