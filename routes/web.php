@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubcategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -66,3 +67,17 @@ Route::post('/brand/store', [BrandController::class, 'brand_store'])->name('bran
 Route::get('/brand/edit/{id}', [BrandController::class, 'brand_edit'])->name('brand.edit');
 Route::post('/brand/update/{id}', [BrandController::class, 'brand_update'])->name('brand.update');
 Route::get('/brand/delete/{id}', [BrandController::class, 'brand_delete'])->name('brand.delete');
+
+
+// Products
+Route::get('/porduct/list', [ProductController::class,'product_list'])->name('product.list');
+Route::get('/porduct/create', [ProductController::class,'product_create'])->name('product.create');
+Route::post('/porduct/store', [ProductController::class,'product_store'])->name('product.store');
+Route::get('/porduct/view/{id}', [ProductController::class,'product_view'])->name('product.view');
+Route::get('/porduct/edit/{id}', [ProductController::class,'product_edit'])->name('product.edit');
+Route::post('/porduct/update/{id}', [ProductController::class,'product_update'])->name('product.update');
+// product category ajax route start
+Route::post('/getSubcategory', [ProductController::class, 'getSubcategory']);
+Route::post('/getStatus', [ProductController::class, 'getStatus']);
+// product category ajax route end
+Route::get('/product/delete/{id}', [ProductController::class, 'product_delete'])->name('product.delete');

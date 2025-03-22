@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>NobleUI Responsive Bootstrap 4 Dashboard Template</title>
@@ -12,6 +13,20 @@
   <!-- plugin css for this page -->
   <link rel="stylesheet" href="{{ asset('backend') }}/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
 	<!-- end plugin css for this page -->
+    {{-- selectize start  --}}
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css"
+        integrity="sha512-pTaEn+6gF1IeWv3W1+7X7eM60TFu/agjgoHmYhAfLEU8Phuf6JKiiE8YmsNC0aCgQv4192s4Vai8YZ6VNM6vyQ=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+        />
+    {{-- selectize end  --}}
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <!-- include summernote css start -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.css" rel="stylesheet">
+    <!-- include summernote css end -->
+
 	<!-- inject:css -->
 	<link rel="stylesheet" href="{{ asset('backend') }}/assets/fonts/feather-font/css/iconfont.css">
 	<link rel="stylesheet" href="{{ asset('backend') }}/assets/vendors/flag-icon-css/css/flag-icon.min.css">
@@ -21,6 +36,80 @@
 	<link rel="stylesheet" href="{{ asset('backend') }}/assets/css/demo_1/style.css">
   <!-- End layout styles -->
   <link rel="shortcut icon" href="{{ asset('backend') }}/assets/images/favicon.png" />
+
+  <style>
+    /* js multiple image preview before upload css  */
+    .upload__box {
+        padding: 0px;
+    }
+    .upload__inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+    }
+    .upload__btn {
+    display: block;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    min-width: 116px;
+    padding: 6px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid;
+    background-color: transparent;
+    border-color: #f2f2f2;
+    font-size: 14px;
+    color: #000;
+    }
+    .upload__btn:hover {
+    background-color: unset;
+    color: #4045ba;
+    transition: all 0.3s ease;
+    }
+    .upload__btn-box {
+    margin-bottom: 10px;
+    }
+    .upload__img-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+    }
+    .upload__img-box {
+    width: 100px;
+    padding: 0 10px;
+    margin-bottom: 12px;
+    }
+    .upload__img-close {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    text-align: center;
+    line-height: 24px;
+    z-index: 1;
+    cursor: pointer;
+    }
+    .upload__img-close:after {
+    content: "✖";
+    font-size: 14px;
+    color: white;
+    }
+
+    .img-bg {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    padding-bottom: 100%;
+    }
+</style>
 </head>
 <body>
 	<div class="main-wrapper">
@@ -78,6 +167,10 @@
 
                 <li class="nav-item">
                     <a href="{{ route('brand.list') }}" class="nav-link">Brand List</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('product.list') }}" class="nav-link">Product List</a>
                 </li>
               </ul>
             </div>
@@ -499,6 +592,18 @@
   <script src="{{ asset('backend') }}/assets/js/dashboard.js"></script>
   <script src="{{ asset('backend') }}/assets/js/datepicker.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  {{-- selectize srcipt start  --}}
+  <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"
+    integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+    ></script>
+  {{-- selectize srcipt start  --}}
+{{-- summernote js start  --}}
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.js"></script>
+{{-- summernote js end  --}}
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
   @yield('footer_script')
 	<!-- end custom js for this page -->
 </body>
