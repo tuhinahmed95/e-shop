@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubcategoryController;
+use App\Http\Controllers\VariationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontendController::class, 'welcome']);
@@ -81,3 +82,20 @@ Route::post('/getSubcategory', [ProductController::class, 'getSubcategory']);
 Route::post('/getStatus', [ProductController::class, 'getStatus']);
 // product category ajax route end
 Route::get('/product/delete/{id}', [ProductController::class, 'product_delete'])->name('product.delete');
+
+
+// Color
+Route::get('/color/list', [VariationController::class, 'color_list'])->name('color.list');
+Route::get('/color/create', [VariationController::class, 'color_create'])->name('color.create');
+Route::post('/color/store', [VariationController::class, 'color_store'])->name('color.store');
+Route::get('/color/edit/{id}', [VariationController::class, 'color_edit'])->name('color.edit');
+Route::post('/color/update/{id}', [VariationController::class, 'color_update'])->name('color.update');
+Route::get('/color/delete/{id}', [VariationController::class, 'color_delete'])->name('color.delete');
+
+// Size
+Route::get('/size/list', [VariationController::class,'size_list'])->name('size.list');
+Route::get('/size/create', [VariationController::class,'size_create'])->name('size.create');
+Route::post('/size/store', [VariationController::class,'size_store'])->name('size.store');
+Route::get('/size/edit/{id}', [VariationController::class,'size_edit'])->name('size.edit');
+Route::post('/size/update/{id}', [VariationController::class,'size_update'])->name('size.update');
+Route::get('/size/delete/{id}', [VariationController::class,'size_delete'])->name('size.delete');

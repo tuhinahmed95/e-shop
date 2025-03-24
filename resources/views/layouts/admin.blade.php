@@ -172,6 +172,14 @@
                 <li class="nav-item">
                     <a href="{{ route('product.list') }}" class="nav-link">Product List</a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('color.list') }}" class="nav-link">Color List</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('size.list') }}" class="nav-link">Size List</a>
+                </li>
               </ul>
             </div>
           </li>
