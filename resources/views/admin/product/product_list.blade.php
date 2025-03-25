@@ -45,6 +45,7 @@
 
                             </td>
                             <td class="d-flex">
+                                <a href="{{ route('add.inventory',$product->id) }}" class="btn btn-info mr-1"><i class="fas fa-warehouse"></i></a>
                                 <a href="{{ route('product.view',$product->id) }}" class="btn btn-primary mr-1"><i data-feather="eye"></i></a>
                                 <a href="{{ route('product.edit',$product->id) }}" class="btn btn-warning mr-1"><i data-feather="edit"></i></a>
                                 <a href="{{ route('product.delete',$product->id) }}" class="btn btn-danger del_btn" ><i data-feather="trash"></i></a>

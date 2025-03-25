@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\VariationController;
@@ -99,3 +100,9 @@ Route::post('/size/store', [VariationController::class,'size_store'])->name('siz
 Route::get('/size/edit/{id}', [VariationController::class,'size_edit'])->name('size.edit');
 Route::post('/size/update/{id}', [VariationController::class,'size_update'])->name('size.update');
 Route::get('/size/delete/{id}', [VariationController::class,'size_delete'])->name('size.delete');
+
+// Inventory
+Route::get('/inventory/create/{id}', [InventoryController::class,'add_inventory'])->name('add.inventory');
+Route::post('/inventory/store/{id}', [InventoryController::class,'inventory_store'])->name('inventory.store');
+Route::get('/inventory/delete/{id}', [InventoryController::class, 'inventory_delete'])->name('inventory.delete');
+
