@@ -184,10 +184,9 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#advancedUI" role="button" aria-expanded="false" aria-controls="advancedUI">
+            <a class="nav-link"  href="{{ route('banner.list') }}" aria-controls="advancedUI">
               <i class="link-icon" data-feather="anchor"></i>
-              <span class="link-title">Advanced UI</span>
-              <i class="link-arrow" data-feather="chevron-down"></i>
+              <span class="link-title">Banner List</span>
             </a>
             <div class="collapse" id="advancedUI">
               <ul class="nav sub-menu">

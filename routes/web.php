@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\HomeController;
@@ -12,7 +13,7 @@ use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\VariationController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [FrontendController::class, 'welcome']);
+Route::get('/', [FrontendController::class, 'welcome'])->name('index');
 Route::get('/dashboard', [HomeController::class, 'dashboard'])->middleware('auth', 'verified')->name('dashboard');
 
 
@@ -105,4 +106,12 @@ Route::get('/size/delete/{id}', [VariationController::class,'size_delete'])->nam
 Route::get('/inventory/create/{id}', [InventoryController::class,'add_inventory'])->name('add.inventory');
 Route::post('/inventory/store/{id}', [InventoryController::class,'inventory_store'])->name('inventory.store');
 Route::get('/inventory/delete/{id}', [InventoryController::class, 'inventory_delete'])->name('inventory.delete');
+
+// Banner
+Route::get('/banner/list', [BannerController::class,'banner_list'])->name('banner.list');
+Route::get('/banner/create', [BannerController::class,'banner_create'])->name('banner.create');
+Route::post('/banner/store', [BannerController::class,'banner_store'])->name('banner.store');
+Route::get('/banner/edit/{id}', [BannerController::class,'banner_edit'])->name('banner.edit');
+Route::post('/banner/update/{id}', [BannerController::class,'banner_update'])->name('banner.update');
+Route::get('/banner/delete/{id}', [BannerController::class,'banner_delete'])->name('banner.delete');
 
