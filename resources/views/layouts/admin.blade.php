@@ -188,48 +188,18 @@
               <i class="link-icon" data-feather="anchor"></i>
               <span class="link-title">Banner List</span>
             </a>
-            <div class="collapse" id="advancedUI">
-              <ul class="nav sub-menu">
-                <li class="nav-item">
-                  <a href="pages/advanced-ui/cropper.html" class="nav-link">Cropper</a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/advanced-ui/owl-carousel.html" class="nav-link">Owl carousel</a>
-                  </li>
-                <li class="nav-item">
-                  <a href="pages/advanced-ui/sweet-alert.html" class="nav-link">Sweet Alert</a>
-                </li>
-              </ul>
-            </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#forms" role="button" aria-expanded="false" aria-controls="forms">
+            <a class="nav-link"  href="{{ route('offer.list') }}"  aria-controls="forms">
               <i class="link-icon" data-feather="inbox"></i>
-              <span class="link-title">Inventory Management</span>
-              <i class="link-arrow" data-feather="chevron-down"></i>
+              <span class="link-title">Exciting Offer</span>
             </a>
-            <div class="collapse" id="forms">
-              <ul class="nav sub-menu">
-                <li class="nav-item">
-                  <a href="pages/forms/basic-elements.html" class="nav-link">Brand</a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/forms/advanced-elements.html" class="nav-link">Advanced Elements</a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/forms/editors.html" class="nav-link">Editors</a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/forms/wizard.html" class="nav-link">Wizard</a>
-                </li>
-              </ul>
-            </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link"  data-toggle="collapse" href="#charts" role="button" aria-expanded="false" aria-controls="charts">
+            <a class="nav-link"  href="{{ route('subscriber.list') }}">
               <i class="link-icon" data-feather="pie-chart"></i>
-              <span class="link-title">Charts</span>
-              <i class="link-arrow" data-feather="chevron-down"></i>
+              <span class="link-title">Subscriber List</span>
+
             </a>
             <div class="collapse" id="charts">
               <ul class="nav sub-menu">

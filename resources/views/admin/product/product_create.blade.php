@@ -155,7 +155,7 @@
                                 <span class="d-block pb-2">Gallery Images</span>
                                 <div class="upload__btn-box">
                                   <label class="upload__btn">
-                                    <p>Upload Gallery images</p>
+                                    <p>Upload images</p>
                                     <input name="gallery[]"  type="file" multiple="" data-max_length="20" class="upload__inputfile">
                                   </label>
                                 </div>

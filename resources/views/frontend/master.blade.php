@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="wpOceans">
@@ -122,7 +123,14 @@
                                 <ul>
                                     <li><a href="compare.html"><i class="fi flaticon-right-and-left"></i><span>Compare</span></a>
                                     </li>
-                                    <li><a href="login.html"><i class="fi flaticon-user-profile"></i><span>Login</span></a></li>
+                                    <li>
+                                        @auth('customer')
+                                            <a href="{{ route('profile') }}"><i class="fi flaticon-user-profile"></i><span>{{ Auth::guard('customer')->user()->fname }}</span></a>
+                                        @else
+                                            <a href="{{ route('customer.login') }}"><i class="fi flaticon-user-profile"></i><span>Login</span></a>
+                                        @endauth
+
+                                    </li>
                                     <li>
                                         <div class="header-wishlist-form-wrapper">
                                             <button class="wishlist-toggle-btn"> <i class="fi flaticon-heart"></i>
@@ -275,7 +283,7 @@
                                     <button class="menu-close"><i class="ti-close"></i></button>
                                     <ul class="nav navbar-nav mb-2 mb-lg-0">
                                         <li class="menu-item-has-children">
-                                            <a href="#">Home</a>
+                                            <a href="{{ route('index') }}">Home</a>
                                         </li>
                                         <li><a href="about.html">About</a></li>
                                         <li class="menu-item-has-children">
@@ -449,7 +457,9 @@
     <script src="{{asset('frontend')}}/js/modernizr.custom.js"></script>
     <script src="{{asset('frontend')}}/js/jquery.dlmenu.js"></script>
     <script src="{{asset('frontend')}}/js/jquery-plugin-collection.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Custom script for this template -->
     <script src="{{asset('frontend')}}/js/script.js"></script>
+    @yield('footer_script')
 </body>
 </html>

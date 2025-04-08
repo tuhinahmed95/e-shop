@@ -7,13 +7,19 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerAuthController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\OfferController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\VariationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontendController::class, 'welcome'])->name('index');
+Route::get('/product/details/{slug}', [FrontendController::class, 'product_details'])->name('product.details');
+Route::post('/getSize', [FrontendController::class, 'getSize']);
+Route::post('/getQuantity', [FrontendController::class, 'getQuantity']);
 Route::get('/dashboard', [HomeController::class, 'dashboard'])->middleware('auth', 'verified')->name('dashboard');
 
 
@@ -115,3 +121,23 @@ Route::get('/banner/edit/{id}', [BannerController::class,'banner_edit'])->name('
 Route::post('/banner/update/{id}', [BannerController::class,'banner_update'])->name('banner.update');
 Route::get('/banner/delete/{id}', [BannerController::class,'banner_delete'])->name('banner.delete');
 
+// Offer
+Route::get('/offer/list', [OfferController::class,'offer_list'])->name('offer.list');
+Route::get('/offer/edit/{id}', [OfferController::class,'offer1_edit'])->name('offer1.edit');
+Route::post('/offer/update/{id}', [OfferController::class,'offer1_update'])->name('offer1.update');
+// Offer2
+Route::get('/offer2/edit{id}', [OfferController::class, 'offer2_edit'])->name('offer2.edit');
+Route::post('/offer2/update{id}', [OfferController::class, 'offer2_update'])->name('offer2.update');
+
+
+// Subscriber
+Route::post('/subscriber/store', [FrontendController::class,'subscriber_store'])->name('subscriber.store');
+Route::get('/subscriber/list', [HomeController::class,'subscriber_list'])->name('subscriber.list');
+
+// Customer
+Route::get('/customer/login', [CustomerAuthController::class,'customer_login'])->name('customer.login');
+Route::get('/customer/register', [CustomerAuthController::class,'customer_register'])->name('customer.register');
+Route::post('/customer/register/store', [CustomerAuthController::class,'customer_register_store'])->name('customer.register.store');
+Route::post('/customer/logged', [CustomerAuthController::class,'customer_logged'])->name('customer.logged');
+Route::get('/profile', [CustomerController::class,'profile'])->name('profile');
+Route::get('/customer/logout', [CustomerController::class,'customer_logout'])->name('customer.logout');

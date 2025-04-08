@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Brand;
-use App\Models\Category;
-use App\Models\Product;
-use App\Models\ProductGallery;
-use App\Models\Subcategory;
 use Carbon\Carbon;
+use App\Models\Brand;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\Subcategory;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\ProductGallery;
 
 class ProductController extends Controller
 {
@@ -39,6 +40,7 @@ class ProductController extends Controller
     }
 
     public function product_store(Request $request){
+
         $request->validate([
             'category_id' => 'required',
             'subcategory_id' => 'required',
@@ -55,6 +57,7 @@ class ProductController extends Controller
             'slug' => 'nullable',
         ]);
 
+        $slug = Str::slug($request->product_name).'-'.rand(1000,2000);
         if($request->hasFile('preview')){
             $preview = $request->file('preview');
             $file_name = time().'.'.$preview->getClientOriginalExtension();
@@ -73,6 +76,7 @@ class ProductController extends Controller
             'long_des' => $request->long_des,
             'addi_info' => $request->addi_info,
             'preview' => $file_name,
+            'slug' => $slug,
             'created_at' => Carbon::now(),
         ]);
 
@@ -125,6 +129,8 @@ class ProductController extends Controller
         ]);
 
         $product = Product::find($id);
+        $file_name = $product->preview;
+        $slug = Str::slug($request->product_name).'-'.rand(1000,2000);
         if($request->hasFile('preview')){
             if($product->preview && file_exists(public_path('uploads/product/preview/').$product->preview)){
                 unlink(public_path('uploads/product/preview/').$product->preview);
@@ -148,6 +154,7 @@ class ProductController extends Controller
             'long_des' => $request->long_des,
             'addi_info' => $request->addi_info,
             'preview' => $file_name,
+            'slug' => $slug,
             'updated_at' => Carbon::now(),
         ]);
 

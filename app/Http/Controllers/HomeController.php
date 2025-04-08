@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Subscriber;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,5 +45,11 @@ class HomeController extends Controller
             'password' => Hash::make($request->password),
         ]);
         return redirect()->route('user.list')->with('User', 'User Add Successfully');
+    }
+
+
+    public function subscriber_list(){
+        $subscribers = Subscriber::all();
+        return view('admin.subscriber.subscriber_list',compact('subscribers'));
     }
 }
