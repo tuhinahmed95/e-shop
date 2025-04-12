@@ -8,6 +8,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CustomerAuthController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\InventoryController;
@@ -150,3 +152,18 @@ Route::post('/add/cart', [CartController::class, 'add_cart'])->name('add.cart');
 Route::get('/cart/remove/{id}', [CartController::class,'cart_remove'])->name('cart.remove');
 Route::get('/cart', [CartController::class,'cart'])->name('cart');
 Route::post('/cart/update', [CartController::class,'cart_update'])->name('cart.update');
+
+// Coupon
+Route::get('/coupon/list',[CouponController::class,'coupon_list'])->name('coupon.list');
+Route::get('/coupon/create',[CouponController::class,'coupon_create'])->name('coupon.crete');
+Route::post('/coupon/store',[CouponController::class,'coupon_store'])->name('coupon.store');
+Route::get('/coupon/status/{id}',[CouponController::class,'coupon_status'])->name('coupon.status');
+Route::get('/coupon/edit/{id}',[CouponController::class,'coupon_edit'])->name('coupon.edit');
+Route::post('/coupon/update/{id}',[CouponController::class,'coupon_update'])->name('coupon.update');
+Route::get('/coupon/delete/{id}',[CouponController::class,'coupon_delete'])->name('coupon.delete');
+
+// Checkout
+Route::get('/chekout', [CheckoutController::class,'checkout'])->name('checkout');
+Route::post('/getCity', [CheckoutController::class,'getCity']);
+Route::post('/order/store', [CheckoutController::class,'order_store'])->name('order.store');
+Route::get('/order/success', [CheckoutController::class,'order_success'])->name('order.success');

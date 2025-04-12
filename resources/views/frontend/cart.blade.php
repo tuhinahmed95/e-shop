@@ -78,15 +78,15 @@
                                             </ul>
                                         </div>
                                     </td>
-                                    <td class="ptice">&#2547;{{ $cart->rel_to_product->after_discount }}</td>
-                                    <td class="td-quantity">
-                                        <div class="quantity cart-plus-minus">
-                                            <input class="text-value" name="quantity[{{ $cart->id }}]" type="text" value="{{ $cart->quantity }}">
-                                            <div class="dec qtybutton">-</div>
-                                            <div class="inc qtybutton">+</div>
+                                    <td class="ptice cartabc">&#2547;{{ $cart->rel_to_product->after_discount }}</td>
+                                    <td class="td-quantity cartabc">
+                                        <div class="quantity">
+                                            <input class="text-value quan" name="quantity[{{ $cart->id }}]" type="text" value="{{ $cart->quantity }}">
+                                            <div data-price="{{ $cart->rel_to_product->after_discount }}" class="dec qtybutton">-</div>
+                                            <div data-price="{{ $cart->rel_to_product->after_discount }}" class="inc qtybutton">+</div>
                                         </div>
                                     </td>
-                                    <td class="ptice">&#2547;{{ $cart->rel_to_product->after_discount*$cart->quantity }}</td>
+                                    <td class="ptice cartabc">&#2547;{{ $cart->rel_to_product->after_discount*$cart->quantity }}</td>
                                     <td class="action">
                                         <ul>
                                             <li class="w-btn"><a data-bs-toggle="tooltip"
@@ -116,10 +116,30 @@
                 </form>
             </div>
             <div class="col-lg-4 col-12">
-                <div class="apply-area mb-2">
-                    <input type="text" class="form-control" placeholder="Enter your coupon">
-                    <button class="theme-btn-s2" type="submit">Apply</button>
-                </div>
+                <form action="{{ route('cart') }}" method="GET">
+                    <div class="apply-area mb-2">
+                        <input type="text" name="coupon" class="form-control" placeholder="Enter your coupon">
+                        <button class="theme-btn-s2" type="submit">Apply</button>
+                    </div>
+                    @if ($mesg)
+                        <div class="alert alert-danger">{{ $mesg }}</div>
+                    @endif
+                 </form>
+                 @php
+
+                     $final_discount = 0;
+                     $total = $sub;
+
+                     if ($type == 1) {
+                         $final_discount = round($sub*$amount/(100));
+                         $total = $sub - $final_discount;
+                     }
+                     elseif ($type == 2) {
+                        $final_discount = $amount;
+                        $total = $sub - $final_discount;
+                     }
+
+                 @endphp
                 <div class="cart-total-wrap">
                     <h3>Cart Totals</h3>
                     <div class="sub-total">
@@ -128,13 +148,19 @@
                     </div>
                     <div class="sub-total my-3">
                         <h4>Discount</h4>
-                        <span>00.00</span>
+                        <span>&#2547;{{ $final_discount }}</span>
                     </div>
                     <div class="total mb-3">
                         <h4>Total</h4>
-                        <span>$300.00</span>
+                        <span>&#2547;{{ $total }}</span>
                     </div>
-                    <a class="theme-btn-s2" href="checkout.html">Proceed To CheckOut</a>
+                    @php
+                        session([
+                            'discount' => $final_discount,
+                            'total' => $total,
+                        ]);
+                    @endphp
+                    <a class="theme-btn-s2" href="{{ route('checkout') }}">Proceed To CheckOut</a>
                 </div>
             </div>
         </div>
@@ -252,3 +278,41 @@
 </div>
 <!-- cart-area end -->
 @endsection
+
+@section('footer_script')
+<script>
+    $('.inc').click(function(){
+    var td = document.getElementsByClassName('cartabc');
+    var array = Array.from(td);
+
+    array.map((item) => {
+        item.addEventListener('click', function(e) {
+            if (e.target.className == 'inc qtybutton') {
+                var price = e.target.dataset.price;
+                var quantity = e.target.parentElement.firstElementChild.value;
+                var sub = price*quantity;
+                var subtotal = item.nextElementSibling.innerHTML = sub;
+            }
+
+            if (e.target.className == 'dec qtybutton') {
+                var price = e.target.dataset.price;
+                var quantity = e.target.parentElement.firstElementChild.value;
+                var sub = price*quantity;
+                var subtotal = item.nextElementSibling.innerHTML = sub;
+            }
+        });
+    });
+});
+</script>
+@endsection
+
+
+
+
+
+
+
+
+
+
+

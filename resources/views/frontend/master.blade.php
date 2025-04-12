@@ -9,6 +9,7 @@
     <meta name="author" content="wpOceans">
     <link rel="shortcut icon" type="image/png" href="{{asset('frontend')}}/images/favicon.png">
     <title>Themart - eCommerce HTML5 Template</title>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link href="{{asset('frontend')}}/css/themify-icons.css" rel="stylesheet">
     <link href="{{asset('frontend')}}/css/font-awesome.min.css" rel="stylesheet">
     <link href="{{asset('frontend')}}/css/flaticon_ecommerce.css" rel="stylesheet">
@@ -23,6 +24,12 @@
     <link href="{{asset('frontend')}}/css/jquery.fancybox.css" rel="stylesheet">
     <link href="{{asset('frontend')}}/css/odometer-theme-default.css" rel="stylesheet">
     <link href="{{asset('frontend')}}/sass/style.css" rel="stylesheet">
+
+    <style>
+        .select2-container{
+            margin-top: 15px
+        }
+    </style>
 </head>
 
 <body>
@@ -174,15 +181,17 @@
                                     </li>
                                     <li>
                                         <div class="mini-cart">
+                                            @php
+                                                $carts = App\Models\Cart::where('customer_id',Auth::guard('customer')->id())->get();
+                                                $sub = 0;
+                                            @endphp
                                             <button class="cart-toggle-btn"> <i class="fi flaticon-add-to-cart"></i>
-                                                <span class="cart-count">2</span></button>
+                                                <span class="cart-count">{{ $carts->count() }}</span></button>
                                             <div class="mini-cart-content">
                                                 <button class="mini-cart-close"><i class="ti-close"></i></button>
-                                                @php
-                                                    $sub = 0;
-                                                @endphp
+
                                                 <div class="mini-cart-items">
-                                                    @foreach (App\Models\Cart::where('customer_id',Auth::guard('customer')->id())->get() as $cart)
+                                                    @foreach ($carts as $cart)
                                                     <div class="mini-cart-item clearfix">
                                                         <div class="mini-cart-item-image">
                                                             <a href="product.html"><img src="{{ asset('uploads/product/preview') }}/{{ $cart->rel_to_product->preview }}" alt=""></a>
@@ -447,6 +456,7 @@
     <script src="{{asset('frontend')}}/js/jquery.dlmenu.js"></script>
     <script src="{{asset('frontend')}}/js/jquery-plugin-collection.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <!-- Custom script for this template -->
     <script src="{{asset('frontend')}}/js/script.js"></script>
     @yield('footer_script')
