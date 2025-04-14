@@ -35,7 +35,7 @@
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item text-center bg-light py-1"><a href="" class="text-dark">My Profile</a></li>
                   <li class="list-group-item text-center bg-light py-1"><a href="" class="text-dark">My Whish List</a></li>
-                  <li class="list-group-item text-center bg-light py-1"><a href="" class="text-dark">My Order</a></li>
+                  <li class="list-group-item text-center bg-light py-1"><a href="{{ route('my.orders') }}" class="text-dark">My Order</a></li>
                   <li class="list-group-item text-center bg-light py-1"><a href="{{ route('customer.logout') }}" class="text-dark">Logout</a></li>
                 </ul>
             </div>

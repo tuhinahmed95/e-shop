@@ -241,24 +241,17 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#icons" role="button" aria-expanded="false" aria-controls="icons">
+            <a class="nav-link" href="{{ route('order.list') }}">
               <i class="link-icon" data-feather="smile"></i>
-              <span class="link-title">Icons</span>
-              <i class="link-arrow" data-feather="chevron-down"></i>
+              <span class="link-title">Order List</span>
             </a>
-            <div class="collapse" id="icons">
-              <ul class="nav sub-menu">
-                <li class="nav-item">
-                  <a href="pages/icons/feather-icons.html" class="nav-link">Feather Icons</a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/icons/flag-icons.html" class="nav-link">Flag Icons</a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/icons/mdi-icons.html" class="nav-link">Mdi Icons</a>
-                </li>
-              </ul>
-            </div>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('orders.cancel.list') }}">
+              <i class="link-icon" data-feather="smile"></i>
+              <span class="link-title">OrderCancel List</span>
+            </a>
           </li>
           <li class="nav-item nav-category">Pages</li>
           <li class="nav-item">
@@ -437,51 +430,19 @@
 									<a href="javascript:;" class="text-muted">Clear all</a>
 								</div>
 								<div class="dropdown-body">
+                                    @foreach (App\Models\OrderCancel::all() as $cancelOrder)
 									<a href="javascript:;" class="dropdown-item">
 										<div class="icon">
 											<i data-feather="user-plus"></i>
 										</div>
 										<div class="content">
-											<p>New customer registered</p>
-											<p class="sub-text text-muted">2 sec ago</p>
+											<p>Cancel Request Pending</p>
+											<p>Order ID :{{ App\Models\Order::find($cancelOrder->order_id)->order_id }}</p>
+											<p class="sub-text text-muted">{{ $cancelOrder->created_at->diffForHumans() }}</p>
 										</div>
 									</a>
-									<a href="javascript:;" class="dropdown-item">
-										<div class="icon">
-											<i data-feather="gift"></i>
-										</div>
-										<div class="content">
-											<p>New Order Recieved</p>
-											<p class="sub-text text-muted">30 min ago</p>
-										</div>
-									</a>
-									<a href="javascript:;" class="dropdown-item">
-										<div class="icon">
-											<i data-feather="alert-circle"></i>
-										</div>
-										<div class="content">
-											<p>Server Limit Reached!</p>
-											<p class="sub-text text-muted">1 hrs ago</p>
-										</div>
-									</a>
-									<a href="javascript:;" class="dropdown-item">
-										<div class="icon">
-											<i data-feather="layers"></i>
-										</div>
-										<div class="content">
-											<p>Apps are ready for update</p>
-											<p class="sub-text text-muted">5 hrs ago</p>
-										</div>
-									</a>
-									<a href="javascript:;" class="dropdown-item">
-										<div class="icon">
-											<i data-feather="download"></i>
-										</div>
-										<div class="content">
-											<p>Download completed</p>
-											<p class="sub-text text-muted">6 hrs ago</p>
-										</div>
-									</a>
+                                    @endforeach
+
 								</div>
 								<div class="dropdown-footer d-flex align-items-center justify-content-center">
 									<a href="javascript:;">View all</a>

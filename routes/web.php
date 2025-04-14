@@ -14,6 +14,7 @@ use App\Http\Controllers\CustomerAuthController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\OfferController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\VariationController;
@@ -145,6 +146,8 @@ Route::post('/customer/logged', [CustomerAuthController::class,'customer_logged'
 Route::get('/profile', [CustomerController::class,'profile'])->name('profile');
 Route::get('/customer/logout', [CustomerController::class,'customer_logout'])->name('customer.logout');
 Route::post('/customer/update', [CustomerController::class,'customer_update'])->name('customer.update');
+Route::get('/my/orders', [CustomerController::class,'my_orders'])->name('my.orders');
+Route::get('/invoice/download/{id}', [CustomerController::class,'invoice_download'])->name('invoice.download');
 
 
 // Cart
@@ -167,3 +170,10 @@ Route::get('/chekout', [CheckoutController::class,'checkout'])->name('checkout')
 Route::post('/getCity', [CheckoutController::class,'getCity']);
 Route::post('/order/store', [CheckoutController::class,'order_store'])->name('order.store');
 Route::get('/order/success', [CheckoutController::class,'order_success'])->name('order.success');
+
+// Orders
+Route::get('/order/list', [OrderController::class,'order_list'])->name('order.list');
+Route::post('/order/status/update/{id}', [OrderController::class,'order_status_update'])->name('orders.status.update');
+Route::get('/order/cancel/{id}', [OrderController::class,'order_cancel'])->name('orders.cancel');
+Route::post('/order/cancel/request/{id}', [OrderController::class,'order_cancel_request'])->name('orders.cancel.request');
+Route::get('/order/cancel/list', [OrderController::class,'order_cancel_list'])->name('orders.cancel.list');
