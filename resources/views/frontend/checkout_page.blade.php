@@ -241,6 +241,7 @@
                                 </div>
                                 <input type="hidden" name="discount" value="{{ session('discount') }}" id="">
                                 <input type="hidden" name="total" value="{{ session('total')}}" id="">
+                                <input type="hidden" name="customer_id" value="{{ Auth::guard('customer')->id()}}" id="">
                                 <div id="open6" class="payment-name active">
                                     <div class="contact-form form-style">
                                         <div class="row">

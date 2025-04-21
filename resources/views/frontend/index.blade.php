@@ -124,6 +124,18 @@
 <div class="product-wrap">
     <div class="row">
         @foreach ($products as $product)
+
+        @php
+            $total_review    = App\Models\OrderProduct::where('product_id',$product->id)->whereNotNull('review')->count();
+            $total_star      = App\Models\OrderProduct::where('product_id',$product->id)->whereNotNull('review')->sum('star');
+            $avg = '';
+
+            if($total_review == 0){
+                $avg = 0;
+            }else {
+                $avg = round($total_star/$total_review);
+            }
+        @endphp
             <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                 <div class="product-item">
                     <div class="image">
@@ -145,12 +157,14 @@
 
                         </a></h2>
                         <div class="rating-product">
-                            <i class="fi flaticon-star"></i>
-                            <i class="fi flaticon-star"></i>
-                            <i class="fi flaticon-star"></i>
-                            <i class="fi flaticon-star"></i>
-                            <i class="fi flaticon-star"></i>
-                            <span>130</span>
+                            @for($i = 0; $i < $avg; $i++)
+                                <i class="fa fa-star"></i>
+                            @endfor
+                            @for($i = $avg; $i <=4; $i++)
+                                <i class="fa fa-star-o"></i>
+                            @endfor
+
+                            <span>{{ $total_review }}</span>
                         </div>
                         <div class="price">
                             <span class="present-price">&#2547;{{ $product->after_discount }}</span>

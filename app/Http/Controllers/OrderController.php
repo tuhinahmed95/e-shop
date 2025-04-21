@@ -58,7 +58,7 @@ class OrderController extends Controller
     }
 
     public function order_cancel_list(){
-        $orderCancels = OrderCancel::all();
+        $orderCancels = OrderCancel::with('order')->get();
         return view('admin.orders.order_cancel_list',compact('orderCancels'));
     }
 }

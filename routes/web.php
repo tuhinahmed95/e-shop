@@ -18,6 +18,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\VariationController;
+use App\Http\Controllers\SslCommerzPaymentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontendController::class, 'welcome'])->name('index');
@@ -175,5 +176,21 @@ Route::get('/order/success', [CheckoutController::class,'order_success'])->name(
 Route::get('/order/list', [OrderController::class,'order_list'])->name('order.list');
 Route::post('/order/status/update/{id}', [OrderController::class,'order_status_update'])->name('orders.status.update');
 Route::get('/order/cancel/{id}', [OrderController::class,'order_cancel'])->name('orders.cancel');
-Route::post('/order/cancel/request/{id}', [OrderController::class,'order_cancel_request'])->name('orders.cancel.request');
+Route::get('/order/cancel/request/{id}', [OrderController::class,'order_cancel_request'])->name('order.cancel.request');
 Route::get('/order/cancel/list', [OrderController::class,'order_cancel_list'])->name('orders.cancel.list');
+
+
+
+// SSLCOMMERZ Start
+Route::get('/pay', [SslCommerzPaymentController::class, 'index'])->name('sslpay');
+Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+
+Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+//SSLCOMMERZ END
+
+// Reviews
+Route::post('/review/store/{id}', [FrontendController::class, 'review_store'])->name('review.store');

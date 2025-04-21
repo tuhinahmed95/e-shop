@@ -437,7 +437,8 @@
 										</div>
 										<div class="content">
 											<p>Cancel Request Pending</p>
-											<p>Order ID :{{ App\Models\Order::find($cancelOrder->order_id)->order_id }}</p>
+											<p>Order ID : {{ App\Models\Order::find($cancelOrder->order_id)?->order_id ?? 'N/A' }}</p>
+
 											<p class="sub-text text-muted">{{ $cancelOrder->created_at->diffForHumans() }}</p>
 										</div>
 									</a>

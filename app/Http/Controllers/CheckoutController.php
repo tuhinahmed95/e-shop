@@ -115,7 +115,7 @@ class CheckoutController extends Controller
                     'quantity' => $cart->quantity,
                     'created_at' => Carbon::now(),
                 ]);
-                $cart->delete();
+                // $cart->delete();
                 Inventory::where('product_id',$cart->product_id)->where('color_id',$cart->color_id)->where('size_id',$cart->size_id)->decrement('quantity',$cart->quantity);
             }
 
@@ -123,7 +123,8 @@ class CheckoutController extends Controller
             return redirect()->route('order.success')->with('success',$order_id);
         }
         elseif($request->payment_method ==2){
-            echo 'ssl';
+            $data = $request->all();
+            return redirect()->route('sslpay')->with('data',$data);
         }
         elseif($request->payment_method == 3){
             echo 'stripe';

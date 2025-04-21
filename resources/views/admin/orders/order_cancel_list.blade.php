@@ -16,7 +16,8 @@
                         @foreach ($orderCancels as $sl=>$orderCancel)
                         <tr>
                             <td>{{ $sl+1 }}</td>
-                            <td>{{ App\Models\Order::find($orderCancel->order_id)->order_id }}</td>
+                            <td>{{ $orderCancel->order->order_id ?? 'Order Not Found' }}</td>
+                            <td><a href="" class="btn btn-warning">View</a></td>
                         </tr>
                         @endforeach
                     </table>
