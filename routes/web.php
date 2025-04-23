@@ -16,6 +16,7 @@ use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\VariationController;
 use App\Http\Controllers\SslCommerzPaymentController;
@@ -194,3 +195,17 @@ Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
 
 // Reviews
 Route::post('/review/store/{id}', [FrontendController::class, 'review_store'])->name('review.store');
+
+
+// Role Manager
+Route::get('/role/manage', [RoleController::class,'role_manage'])->name('role.manage');
+Route::post('/permission/store', [RoleController::class,'permission_store'])->name('permission.store');
+Route::post('/role/store', [RoleController::class,'role_store'])->name('role.store');
+Route::get('/role/edit{id}', [RoleController::class,'role_edit'])->name('role.edit');
+Route::post('/role/update{id}', [RoleController::class,'role_update'])->name('role.update');
+Route::get('/role/delete/{id}', [RoleController::class,'role_delete'])->name('role.delete');
+Route::post('/assign/role', [RoleController::class,'assign_role'])->name('assign.role');
+Route::get('/remove/role/{id}', [RoleController::class,'remove_role'])->name('remove.role');
+
+// Forget Password Reset
+// Route::get('')

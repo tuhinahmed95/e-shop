@@ -253,6 +253,14 @@
               <span class="link-title">OrderCancel List</span>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('role.manage') }}">
+              <i class="link-icon" data-feather="smile"></i>
+              <span class="link-title">Role Manage</span>
+            </a>
+          </li>
+
           <li class="nav-item nav-category">Pages</li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#general-pages" role="button" aria-expanded="false" aria-controls="general-pages">
