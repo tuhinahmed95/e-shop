@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\CustomerEmailVerify;
 use App\Models\Order;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -109,5 +111,19 @@ class CustomerController extends Controller
         $dompdf->render();
 
         return $dompdf->stream('invoice_' . $order->id . '.pdf');
+    }
+
+    public function customer_email_verified($token){
+        if(CustomerEmailVerify::where('token',$token)->exists()){
+            $verif_info = CustomerEmailVerify::where('token',$token)->first();
+            Customer::find($verif_info->customer_id)->update([
+                'email_verified_at' => Carbon::now(),
+            ]);
+            CustomerEmailVerify::where('token',$token)->delete();
+            return redirect()->route('customer.login');
+        }
+        else{
+            abort('404');
+        }
     }
 }

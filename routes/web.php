@@ -20,6 +20,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\VariationController;
 use App\Http\Controllers\SslCommerzPaymentController;
+use App\Http\Controllers\PassResetController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontendController::class, 'welcome'])->name('index');
@@ -150,6 +151,7 @@ Route::get('/customer/logout', [CustomerController::class,'customer_logout'])->n
 Route::post('/customer/update', [CustomerController::class,'customer_update'])->name('customer.update');
 Route::get('/my/orders', [CustomerController::class,'my_orders'])->name('my.orders');
 Route::get('/invoice/download/{id}', [CustomerController::class,'invoice_download'])->name('invoice.download');
+Route::get('/customer/email/verified/{token}', [CustomerController::class,'customer_email_verified'])->name('customer.email.verified');
 
 
 // Cart
@@ -208,4 +210,7 @@ Route::post('/assign/role', [RoleController::class,'assign_role'])->name('assign
 Route::get('/remove/role/{id}', [RoleController::class,'remove_role'])->name('remove.role');
 
 // Forget Password Reset
-// Route::get('')
+Route::get('/pass/reset', [PassResetController::class,'pass_reset'])->name('pass.reset');
+Route::post('/pass/reset/request', [PassResetController::class,'pass_reset_request'])->name('pass.reset.store');
+Route::get('/pass/reset/form/{token}', [PassResetController::class,'pass_reset_form'])->name('pass.reset.form');
+Route::post('/pass/reset/confirm/{token}', [PassResetController::class,'pass_reset_confirm'])->name('pass.reset.confirm');

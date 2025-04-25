@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\CustomerEmailVerify;
+use App\Notifications\EmailVerifyNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;
 
 class CustomerAuthController extends Controller
 {
@@ -26,15 +29,22 @@ class CustomerAuthController extends Controller
             'password' => 'required|confirmed',
         ]);
 
-        Customer::create([
+        $customer_info = Customer::create([
             'fname' => $request->fname,
             'lname' => $request->lname,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'created_at' => Carbon::now(),
         ]);
+        Customer::where('customer_id',$customer_info->id)->delete();
+        $info = CustomerEmailVerify::create([
+            'customer_id' => $customer_info->id,
+            'token' => uniqid(),
+            'created_at' => Carbon::now(),
+        ]);
 
-        return redirect()->route('index');
+        Notification::send($customer_info, new EmailVerifyNotification($info));
+        return redirect()->route('customer.login');
     }
 
     public function customer_logged(Request $request){
@@ -55,4 +65,6 @@ class CustomerAuthController extends Controller
             return back()->with('exists','Email Does not Match');
         }
     }
+
+   
 }
